@@ -56,9 +56,7 @@ function handlerClick() {
 
     userSelectedDate = new Date(elements.input.value).getTime();
     let ms = userSelectedDate - currentDate;
-    console.log(currentDate);
     
-
     intervalID = setInterval(()=> {
         ms -= 1000;
         elements.seconds.textContent = addLeadingZero(convertMs(ms).seconds);
