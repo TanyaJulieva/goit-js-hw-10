@@ -6,13 +6,20 @@ import 'izitoast/dist/css/iziToast.min.css';
 const elements = {
   btnStart: document.querySelector('[data-start]'),
   input: document.querySelector('#datetime-picker'),
+  days: document.querySelector('[data-days]'),
+  hours: document.querySelector('[data-hours]'),
+  minutes: document.querySelector('[data-minutes]'),
+  seconds: document.querySelector('[data-seconds]'),
 };
 
 elements.btnStart.disabled = true;
+elements.input.disabled = false;
 
 const currentDate = new Date().getTime();
-
 let userSelectedDate;
+let intervalID;
+
+
 
 const options = {
   enableTime: true,
@@ -21,8 +28,8 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     userSelectedDate = selectedDates[0].getTime();
-    const currentDate = new Date().getTime();
     let ms = userSelectedDate - currentDate;
+
     if (ms < 0) {
         elements.btnStart.disabled = true;
       iziToast.show({
@@ -31,14 +38,40 @@ const options = {
       return
     };
     elements.btnStart.disabled = false;
+    elements.btnStart.addEventListener('click', handlerClick)
   },
 };
 
 flatpickr(elements.input, options);
 
-function addLeadingZero(number) {
-    return number.padStart(2, '0')
-  };
+
+
+function handlerClick() {
+    // if (intervalId) {
+    //     clearInterval(intervalId);
+    //   }
+
+    elements.btnStart.disabled = true;
+    elements.input.disabled = true;
+
+    userSelectedDate = new Date(elements.input.value).getTime();
+    let ms = userSelectedDate - currentDate;
+    console.log(currentDate);
+    
+
+    intervalID = setInterval(()=> {
+        ms -= 1000;
+        elements.seconds.textContent = addLeadingZero(convertMs(ms).seconds);
+        elements.minutes.textContent = addLeadingZero(convertMs(ms).minutes);
+        elements.hours.textContent = addLeadingZero(convertMs(ms).hours);
+        elements.days.textContent = addLeadingZero(convertMs(ms).days);
+    } , 1000)
+    
+};
+
+  function addLeadingZero(number) {
+    return ('0' + number).slice(-2);
+  }
 
 function convertMs(ms) {
     const second = 1000;
