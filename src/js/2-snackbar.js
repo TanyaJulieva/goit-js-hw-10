@@ -9,11 +9,16 @@ const elements = {
 };
 
 elements.submitBtn.addEventListener('submit', handlerSubmit);
+let delay = elements.delayInput.value;
+console.dir(elements.fulfilledInput);
+console.dir(elements.fulfilledInput);
+console.dir(elements.rejectedInput);
 
 function handlerSubmit(evt) {
-  evt.preventDefault();
+  // evt.preventDefault();
 
-  let delay = Number(elements.delayInput.value);
+  // let delay = Number(elements.delayInput.value);
+  // console.log(delay);
 
   const promise = new Promise((res, rej) => {
     setTimeout(() => {
