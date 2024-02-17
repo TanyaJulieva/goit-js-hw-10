@@ -16,12 +16,8 @@ function handlerSubmit(evt) {
   let delay = elements.delayInput.value;
 
   const promise = new Promise((res, rej) => {
-    elements.delayInput.value = '';
-    // elements.fulfilledInput.checked = false;
-
     setTimeout(() => {
       if (elements.fulfilledInput.checked) {
-        elements.fulfilledInput.checked = false;
         res(delay);
       }
       if (elements.rejectedInput.checked) {
@@ -34,12 +30,15 @@ function handlerSubmit(evt) {
   promise
     .then(delay => {
       iziToast.show({
-        message: `✅ Fulfilled promise in ${delay}ms`,
+        message: `Fulfilled promise in ${delay}ms`,
       });
     })
     .catch(delay => {
       iziToast.show({
-        message: `❌ Rejected promise in ${delay}ms`,
+        icon: '',
+        message: `Rejected promise in ${delay}ms`,
       });
     });
+
+    evt.currentTarget.reset()
 }
