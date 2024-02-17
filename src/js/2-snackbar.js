@@ -42,6 +42,6 @@ function handlerSubmit(evt) {
       });
     });
 
-  // elements.fulfilledInput.checked = false;
-  // elements.rejectedInput.checked = false;
+  elements.fulfilledInput.checked = false;
+  elements.rejectedInput.checked = false;
 }
