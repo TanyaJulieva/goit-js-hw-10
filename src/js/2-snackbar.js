@@ -14,14 +14,10 @@ elements.form.addEventListener('submit', handlerSubmit);
 function handlerSubmit(evt) {
   evt.preventDefault();
 
-  // elements.fulfilledInput.checked = false;
-  // elements.rejectedInput.checked = false;
-  // elements.delayInput.value = '';
-
   let delay = elements.delayInput.value;
 
   const promise = new Promise((res, rej) => {
-    elements.delayInput.value = '';
+    elements.delayInput.value = ""
 
     setTimeout(() => {
       if (elements.fulfilledInput.checked) {
