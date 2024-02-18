@@ -48,9 +48,6 @@ const options = {
 flatpickr(elements.input, options);
 
 function handlerClick() {
-  // if (intervalID) {
-  //   clearInterval(intervalID);
-  // }
   elements.btnStart.disabled = true;
   elements.input.disabled = true;
 
