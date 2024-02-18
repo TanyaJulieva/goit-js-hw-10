@@ -1,6 +1,7 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
-import Icon from '/img/icons.svg';
+import Succes from '../img/succes.svg';
+import ErrorIcon from '../img/err.svg';
 
 const elements = {
   form: document.querySelector('.form'),
@@ -14,15 +15,14 @@ elements.form.addEventListener('submit', handlerSubmit);
 function handlerSubmit(evt) {
   evt.preventDefault();
 
-  let delay = elements.delayInput.value;
+  const delay = evt.currentTarget.elements.delay.value;
+  const radioBtn = evt.currentTarget.elements.state.value;
 
-  console.log(createPromise(delay));
-
-  createPromise(delay)
-    .then(delay => {
+  createPromise(radioBtn, delay)
+    .then(res => {
       iziToast.show({
+        iconUrl: Succes,
         class: 'popup-message',
-        iconUrl: Icon,
         position: 'topRight',
         title: 'OK',
         titleColor: '#FFFFFF',
@@ -31,8 +31,9 @@ function handlerSubmit(evt) {
         message: `Fulfilled promise in ${delay}ms`,
       });
     })
-    .catch(delay => {
+    .catch(rej => {
       iziToast.show({
+        iconUrl: ErrorIcon,
         class: 'popup-message',
         position: 'topRight',
         title: 'Error',
@@ -43,53 +44,17 @@ function handlerSubmit(evt) {
       });
     });
 
-  function createPromise() {
+  function createPromise(btn, delay) {
     return new Promise((res, rej) => {
       setTimeout(() => {
-        if (elements.fulfilledInput.checked) {
-          res(delay);
+        if (btn === 'fulfilled') {
+          res({ delay });
         }
-        if (elements.rejectedInput.checked) {
-          rej(delay);
-        };
+        else {
+          rej({ delay });
+        }
       }, delay);
     });
   }
-  
-  // const promise = new Promise((res, rej) => {
-  //   setTimeout(() => {
-  //     if (elements.fulfilledInput.checked) {
-  //       res(delay);
-  //     }
-  //     if (elements.rejectedInput.checked) {
-  //       rej(delay);
-  //     }
-  //     console.log(promise);
-  //   }, delay);
-  // });
-
-  // promise
-  //   .then(delay => {
-  //     iziToast.show({
-  //       class: 'popup-message',
-  //       iconUrl: Icon,
-  //       position: 'topRight',
-  //       title: 'OK',
-  //       titleColor: '#FFFFFF',
-  //       backgroundColor: '#59A10D',
-  //       messageColor: '#FFFFFF',
-  //       message: `Fulfilled promise in ${delay}ms`,
-  //     });
-  //   })
-  //   .catch(delay => {
-  //     iziToast.show({
-  //       class: 'popup-message',
-  //       position: 'topRight',
-  //       title: 'Error',
-  //       titleColor: '#FFFFFF',
-  //       backgroundColor: '#EF4040',
-  //       messageColor: '#FFFFFF',
-  //       message: `Rejected promise in ${delay}ms`,
-  //     });
-  // });
+  evt.currentTarget.reset();
 }

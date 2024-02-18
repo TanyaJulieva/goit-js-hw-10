@@ -5,7 +5,31 @@
     max-width: 360px;
 }
 
+.form>label {
+    display: flex;
+    flex-direction: column;
+}
+
+.form [type=number]{
+    border-radius: 4px;
+    border-style:solid;
+    border-color: #808080;
+    border-width: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .state{
     border-radius: 4px;
+    border-style:solid;
     border-color: #808080;
+}
+
+.form [type=submit]{
+    border: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+    background-color: #4E75FF;
+    color: #FFFFFF;
 }

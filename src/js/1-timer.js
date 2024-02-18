@@ -30,6 +30,12 @@ const options = {
     if (ms < 0) {
       elements.btnStart.disabled = true;
       iziToast.show({
+        class: 'popup-message',
+        position: 'topRight',
+        title: 'Error',
+        titleColor: '#FFFFFF',
+        backgroundColor: '#EF4040',
+        messageColor: '#FFFFFF',
         message: 'Please choose a date in the future',
       });
       return;
