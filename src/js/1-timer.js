@@ -14,9 +14,9 @@ const elements = {
 
 elements.btnStart.disabled = true;
 
-const currentDate = new Date().getTime();
 let userSelectedDate;
 let intervalID;
+let currentDate;
 
 const options = {
   enableTime: true,
@@ -24,6 +24,7 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    currentDate = new Date().getTime();
     userSelectedDate = selectedDates[0].getTime();
     let ms = userSelectedDate - currentDate;
 
@@ -50,7 +51,8 @@ flatpickr(elements.input, options);
 function handlerClick() {
   elements.btnStart.disabled = true;
   elements.input.disabled = true;
-
+  
+  // const currentDate = new Date().getTime();
   userSelectedDate = new Date(elements.input.value).getTime();
   let ms = userSelectedDate - currentDate;
 

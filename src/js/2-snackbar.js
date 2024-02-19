@@ -48,10 +48,10 @@ function handlerSubmit(evt) {
     return new Promise((res, rej) => {
       setTimeout(() => {
         if (btn === 'fulfilled') {
-          res({ delay });
+          res(delay);
         }
         else {
-          rej({ delay });
+          rej(delay);
         }
       }, delay);
     });
