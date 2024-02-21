@@ -41,11 +41,12 @@ const options = {
       return;
     }
     elements.btnStart.disabled = false;
-    elements.btnStart.addEventListener('click', handlerClick);
   },
 };
 
 flatpickr(elements.input, options);
+
+elements.btnStart.addEventListener('click', handlerClick);
 
 function handlerClick() {
   let intervalID;
