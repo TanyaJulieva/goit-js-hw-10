@@ -12,12 +12,9 @@ const elements = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-console.log(elements.btnStart)
-
 elements.btnStart.disabled = true;
 
 let userSelectedDate;
-let intervalID;
 let currentDate;
 
 const options = {
@@ -51,10 +48,11 @@ const options = {
 flatpickr(elements.input, options);
 
 function handlerClick() {
+  let intervalID;
   elements.btnStart.disabled = true;
   elements.input.disabled = true;
   
-  // const currentDate = new Date().getTime();
+  const currentDate = new Date().getTime();
   userSelectedDate = new Date(elements.input.value).getTime();
   let ms = userSelectedDate - currentDate;
 
