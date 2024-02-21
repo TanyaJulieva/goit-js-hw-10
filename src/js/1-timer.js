@@ -12,6 +12,8 @@ const elements = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
+console.log(elements.btnStart)
+
 elements.btnStart.disabled = true;
 
 let userSelectedDate;
